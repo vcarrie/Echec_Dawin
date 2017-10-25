@@ -9,22 +9,14 @@ Tour::Tour(bool white, bool left) : Piece((left?1:8),(white?1:8),white) { }
 bool
 Tour::mouvementValide(Echiquier &e, int x, int y)
 {
-
-    cout << "mouvementValide de Tour" << endl;
-
-
     int direction = 0;
-
-
 
     if((x < 1) || (y < 1) || (x > 8) || (y > 8)){ return false; } //hors limite
     if(((m_x == x)&&(y == m_y))){ return false; }//same place
     if(((m_x != x)&&(y != m_y))){ return false; }//move is not straight
 
     if(e.getPiece(x, y) != NULL){
-
         if(e.getPiece(x, y)->get_white() == m_white){ return false; }
-
     }//Same color on target
 
     //path is blocked or not?
@@ -37,7 +29,6 @@ Tour::mouvementValide(Echiquier &e, int x, int y)
     case 0:
         for ( int i = m_y+1; i < y; i++ ) {
             if(e.getPiece(x, i)!=NULL){ return false; }
-
         }
         break;
     case 1:
@@ -56,12 +47,11 @@ Tour::mouvementValide(Echiquier &e, int x, int y)
         return false;
     }
 
-
     return true;
 }
 
 char
 Tour::type()
 {
-  return m_white ? 'T' : 't';
+    return m_white ? 'T' : 't';
 }

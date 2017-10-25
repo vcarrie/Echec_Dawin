@@ -16,11 +16,11 @@ using namespace std;
  */
 Echiquier::Echiquier()
 {
-  for (int i = 0 ; i < 64 ; i++)
-  {
-    m_cases[ i ] = NULL;
-    //m_cases[ i ] = 0; //equivalent
-  }
+    for (int i = 0 ; i < 64 ; i++)
+    {
+        m_cases[ i ] = NULL;
+        //m_cases[ i ] = 0; //equivalent
+    }
 }
 
 
@@ -36,10 +36,10 @@ Echiquier::Echiquier()
 Piece*
 Echiquier::getPiece( int x, int y )
 {
-  if ( x >= 1  && x <= 8 && y >= 1 && y <= 8 )
-    return m_cases[ x - 1 + (y - 1) * 8];
+    if ( x >= 1  && x <= 8 && y >= 1 && y <= 8 )
+        return m_cases[ x - 1 + (y - 1) * 8];
 
-  return NULL;
+    return NULL;
 }
 
 
@@ -54,15 +54,15 @@ Echiquier::getPiece( int x, int y )
 bool
 Echiquier::placer( Piece* p )
 {
-  if ( ( p != NULL )
-       && ( getPiece( p->x(), p->y() ) == NULL )
-       && ( p->x() >= 1 ) && ( p->x() <= 8 )
-       && ( p->y() >= 1 ) && ( p->y() <= 8 ) )
-  {
-    m_cases[p->x() - 1 + (p->y() - 1) * 8] = p;
-    return true;
-  }
-  return false;
+    if ( ( p != NULL )
+         && ( getPiece( p->x(), p->y() ) == NULL )
+         && ( p->x() >= 1 ) && ( p->x() <= 8 )
+         && ( p->y() >= 1 ) && ( p->y() <= 8 ) )
+    {
+        m_cases[p->x() - 1 + (p->y() - 1) * 8] = p;
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -80,6 +80,16 @@ Echiquier::placer( Piece* p )
 bool
 Echiquier::deplacer( Piece* p, int x, int y )
 {
+    if(p->mouvementValide(*this,x,y)){
+        this->enleverPiece(x, y);
+        p = enleverPiece(p->x(),p->y());
+        p->move(x,y);
+        placer(p);
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 
@@ -95,16 +105,16 @@ Echiquier::deplacer( Piece* p, int x, int y )
 Piece*
 Echiquier::enleverPiece( int x, int y )
 {
-  if ( ( x >= 1 ) && ( x <= 8 )
-       && ( y >= 1 ) && ( y <= 8 )
-       && ( getPiece( x, y ) != 0 ) )
-  {
-    Piece *tmp;
-    tmp=m_cases[x - 1 + (y - 1) * 8];
-    m_cases[x - 1 + (y - 1) * 8] = NULL;
-    return tmp;
-  }
-  return NULL;
+    if ( ( x >= 1 ) && ( x <= 8 )
+         && ( y >= 1 ) && ( y <= 8 )
+         && ( getPiece( x, y ) != 0 ) )
+    {
+        Piece *tmp;
+        tmp=m_cases[x - 1 + (y - 1) * 8];
+        m_cases[x - 1 + (y - 1) * 8] = NULL;
+        return tmp;
+    }
+    return NULL;
 }
 
 
@@ -116,21 +126,21 @@ Echiquier::enleverPiece( int x, int y )
 void
 Echiquier::affiche()
 {
-  cout << endl << "  12345678" << endl;
-  for ( int y = 1; y <= 8; ++y )
+    cout << endl << "  12345678" << endl;
+    for ( int y = 1; y <= 8; ++y )
     {
-      cout << y << " ";
-      for ( int x = 1; x <= 8; ++x )
-    {
-      char c;
-      Piece* p = getPiece( x, y );
-      if ( p == 0 )
-        c = ( ( x + y ) % 2 ) == 0 ? '#' : '.';
-      else
-        c = p->type(); //c = p->isWhite() ? 'B' : 'N';
-      cout << c;
+        cout << y << " ";
+        for ( int x = 1; x <= 8; ++x )
+        {
+            char c;
+            Piece* p = getPiece( x, y );
+            if ( p == 0 )
+                c = ( ( x + y ) % 2 ) == 0 ? '#' : '.';
+            else
+                c = p->type(); //c = p->isWhite() ? 'B' : 'N';
+            cout << c;
+        }
+        cout << " " << y << endl;
     }
-      cout << " " << y << endl;
-    }
-  cout << "  12345678" << endl;
+    cout << "  12345678" << endl;
 }

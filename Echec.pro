@@ -19,23 +19,23 @@ SOURCES += \
     Joueur.cxx \
     Piece.cxx \
     testPiece.cxx \
-    Pion.cxx \
     Cavalier.cxx \
     Fou.cxx \
     Reine.cxx \
     Tour.cxx \
-    Roi.cxx
+    Roi.cxx \
+    Pion.cxx
 
 HEADERS += \
     Echiquier.h \
     Joueur.h \
     Piece.h \
-    Pion.h \
     Cavalier.h \
     Fou.h \
     Reine.h \
     Tour.h \
-    Roi.h
+    Roi.h \
+    Pion.h
 
 DISTFILES += \
     Makefile

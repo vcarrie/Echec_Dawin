@@ -15,8 +15,6 @@
 #include "Tour.h"
 #include "Fou.h"
 
-
-
 // Pour utiliser les flux de iostream sans mettre "std::" tout le temps.
 using namespace std;
 
@@ -26,74 +24,66 @@ using namespace std;
  */
 int main( int argc, char** argv )
 {
-  JoueurNoir jn;
-  JoueurBlanc jb;
+    JoueurNoir jn;
+    JoueurBlanc jb;
 
-  Echiquier e;
-  e.affiche();
+    Echiquier e;
 
-  bool piecesOK;
-  piecesOK = jn.placerPieces(e);
-  assert(piecesOK);
-  piecesOK = jb.placerPieces(e);
-  assert(piecesOK);
-  Pion p4(1, true);
-  assert(!e.placer(&p4));
-  Piece *p_empty = NULL;
-  assert(!e.placer(p_empty));
-  Piece *p_bad = new Pion(10, true);
-  assert(!e.placer(p_bad));
-  delete p_bad;
-  e.affiche();
+    bool piecesOK;
+    piecesOK = jn.placerPieces(e);
+    assert(piecesOK);
+    piecesOK = jb.placerPieces(e);
+    assert(piecesOK);
 
-  e.enleverPiece(1, 8);
-  assert(!e.enleverPiece(10, 8));
-  assert(!e.enleverPiece(1, 8));
-  e.affiche();
+    int x_before, y_before, x_after, y_after;
+    bool joueur = true; //White player = true, Black player = false
+    bool endGame = false;
+    string joueurString;
 
-  jn.affiche();
-  jb.affiche();
+    cout << "La partie commence !" << endl;
 
-
-  Piece* ptr = e.getPiece(7, 1);
-
-  Piece* ptrPion = e.getPiece(1, 7);
-
-
-  Piece* ptrTour = e.getPiece(1, 1);
-
-  Piece* ptrFou = e.getPiece(3, 1);
-
-
-//  Cavalier* cav = dynamic_cast<Cavalier*> (ptr);
-//  if(cav==0){ cerr <<"Pas le bon type" << endl; }
-//  int z = 0;
-//  if (cav->mouvementValide(e, 8, 3)) {  z = 5; } else { z = 6; }
-//  cout << z << endl;
-
-//    Pion* pion = dynamic_cast<Pion*> (ptrPion);
-//    if(pion==0){ cerr <<"Pas le bon type" << endl; }
-//    int z = 0;
-//    if (pion->mouvementValide(e, 2, 5)) {  z = 5; } else { z = 6; }
-//    cout << z << endl;
-
-//      Tour* tour = dynamic_cast<Tour*> (ptrTour);
-//      if(tour==0){ cerr <<"Pas le bon type" << endl; }
-//      int z = 0;
-//      if (tour->mouvementValide(e, 1, 5)) {  z = 5; } else { z = 6; }
-//      cout << z << endl;
-
-        Fou* fou = dynamic_cast<Fou*> (ptrFou);
-        if(fou==0){ cerr <<"Pas le bon type" << endl; }
-        int z = 0;
-        e.enleverPiece(2,2);
+    while(!endGame){
         e.affiche();
-        if (fou->mouvementValide(e, 2, 2)) {  z = 5; } else { z = 6; }
-        cout << z << endl;
 
+        joueurString = joueur?"blanc":"noir";
 
-  // les objets definis dans cette fonction sont automatiquement détruits.
-  // Ex : p1
+        cout << endl << "Au tour du joueur " << joueurString << " !" << endl << endl;
 
-  return 0;
+        cout << "Quelle pièce voulez-vous déplacer ?" << endl;
+
+        cout << "x : ";
+        cin >> x_before;
+        cout << endl;
+
+        cout << "y : ";
+        cin >> y_before;
+        cout << endl;
+
+        cout << "Où voulez-vous la poser ?" << endl;
+
+        cout << "x : ";
+        cin >> x_after;
+        cout << endl;
+
+        cout << "y : ";
+        cin >> y_after;
+        cout << endl;
+
+        if(e.getPiece(x_before, y_before)->get_white() == joueur){
+            if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){
+                system("clear");
+                joueur = !joueur;
+            }
+            else {
+                system("clear");
+                cout << "Mouvement invalide ! Veuillez recommencer." << endl;
+            }
+        }
+        else{
+            system("clear");
+            cout << "Vous essayez de déplacer le pion de votre adversaire !" << endl;
+        }
+    }
+
+    return 0;
 }

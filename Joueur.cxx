@@ -11,7 +11,7 @@ using namespace std;
 
 Joueur::Joueur()
 {
-    cout << "Création de joueur sans paramètres " << endl;
+    //cout << "Création de joueur sans paramètres " << endl;
 }
 
 Joueur::Joueur(bool white)
