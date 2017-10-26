@@ -33,6 +33,7 @@ Piece & Piece::operator=(const Piece & p) {
   this->m_y = p.y();
   this->m_white = p.isWhite();
 
+
   return *this; // On retourne une référence sur l'objet courant
 }
 
@@ -42,6 +43,7 @@ Piece::init( int x, int y, bool white )
   m_x = x;
   m_y = y;
   m_white = white;
+  is_roi = false;
 }
 
 void
@@ -78,6 +80,12 @@ bool
 Piece::isWhite() const
 {
   return m_white;
+}
+
+bool
+Piece::isRoi() const
+{
+  return is_roi;
 }
 
 bool

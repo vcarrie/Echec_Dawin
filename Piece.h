@@ -18,6 +18,7 @@ protected:
   int m_x;
   int m_y;
   bool m_white;
+  bool is_roi;
 
 public:
   Piece();
@@ -33,6 +34,7 @@ public:
   int x() const;
   int y() const;
   bool isWhite() const;
+  bool isRoi() const;
   bool isBlack() const;
   virtual bool mouvementValide(Echiquier &e, int x, int y) = 0;
   virtual char type();

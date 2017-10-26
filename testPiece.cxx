@@ -40,8 +40,10 @@ int main( int argc, char** argv )
     bool endGame = false;
     string joueurString;
 
-    cout << "La partie commence !" << endl;
 
+
+    cout << "La partie commence !" << endl;
+    cout << e.getPiece(5,8)->isRoi() << endl;
     while(!endGame){
         e.affiche();
 
@@ -50,24 +52,46 @@ int main( int argc, char** argv )
         cout << endl << "Au tour du joueur " << joueurString << " !" << endl << endl;
 
         cout << "Quelle pièce voulez-vous déplacer ?" << endl;
+        bool x1 = true;
+        bool x2 = true;
+        bool y1 = true;
+        bool y2 = true;
 
-        cout << "x : ";
-        cin >> x_before;
-        cout << endl;
+        while(x1){
+            cout << "x : ";
+            cin >> x_before;
+            cout << endl;
 
-        cout << "y : ";
-        cin >> y_before;
-        cout << endl;
+            if((x_before >= 1) && (x_before <= 8)){ x1 = false; }
+        }
+
+
+        while(y1){
+            cout << "y : ";
+            cin >> y_before;
+            cout << endl;
+
+            if((y_before >= 1) && (y_before <= 8)){ y1 = false; }
+        }
 
         cout << "Où voulez-vous la poser ?" << endl;
 
-        cout << "x : ";
-        cin >> x_after;
-        cout << endl;
 
-        cout << "y : ";
-        cin >> y_after;
-        cout << endl;
+         while(x2){
+            cout << "x : ";
+            cin >> x_after;
+            cout << endl;
+
+            if((x_after >= 1) && (x_after <= 8)){ x2 = false; }
+         }
+
+        while(y2){
+            cout << "y : ";
+            cin >> y_after;
+            cout << endl;
+
+            if((y_after >= 1) && (y_after <= 8)){ y2 = false; }
+         }
 
         if(e.getPiece(x_before, y_before)->get_white() == joueur){
             if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){
