@@ -35,16 +35,20 @@ Tour::mouvementValide(Echiquier &e, int x, int y)
         for ( int i = m_y-1; i > y; i-- ) {
             if(e.getPiece(x, i)!=NULL){ return false; }
         }
+        break;
     case 2:
         for ( int i = m_x+1; i < x; i++ ) {
             if(e.getPiece(y, i)!=NULL){ return false; }
         }
+        break;
     case 3:
         for ( int i = m_x-1; i > x; i++ ) {
             if(e.getPiece(y, i)!=NULL){ return false; }
         }
+        break;
     default:
         return false;
+        break;
     }
 
     return true;

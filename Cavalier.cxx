@@ -8,7 +8,6 @@ Cavalier::mouvementValide(Echiquier &ech, int x, int y)
     x -=1;
     y -=1;
     int indiceDemande = x + y * 8;
-    int IndiceActuel = (m_x-1) + (m_y-1) * 8;
 
     Cavalier::calcul_move_possible(m_x-1, m_y-1);
     bool is_in_tab = false;

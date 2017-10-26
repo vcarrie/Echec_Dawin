@@ -40,10 +40,8 @@ int main( int argc, char** argv )
     bool endGame = false;
     string joueurString;
 
-
-
     cout << "La partie commence !" << endl;
-    cout << e.getPiece(5,8)->isRoi() << endl;
+
     while(!endGame){
         e.affiche();
 
@@ -77,13 +75,13 @@ int main( int argc, char** argv )
         cout << "Où voulez-vous la poser ?" << endl;
 
 
-         while(x2){
+        while(x2){
             cout << "x : ";
             cin >> x_after;
             cout << endl;
 
             if((x_after >= 1) && (x_after <= 8)){ x2 = false; }
-         }
+        }
 
         while(y2){
             cout << "y : ";
@@ -91,21 +89,27 @@ int main( int argc, char** argv )
             cout << endl;
 
             if((y_after >= 1) && (y_after <= 8)){ y2 = false; }
-         }
-
-        if(e.getPiece(x_before, y_before)->get_white() == joueur){
-            if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){
-                system("clear");
-                joueur = !joueur;
-            }
-            else {
-                system("clear");
-                cout << "Mouvement invalide ! Veuillez recommencer." << endl;
-            }
         }
-        else{
+
+        if(e.getPiece(x_before, y_before) == NULL){
             system("clear");
-            cout << "Vous essayez de déplacer le pion de votre adversaire !" << endl;
+            cout << "Il n'y a pas de pièce ici !";
+        }
+        else {
+            if(e.getPiece(x_before, y_before)->get_white() == joueur){
+                if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){
+                    system("clear");
+                    joueur = !joueur;
+                }
+                else {
+                    system("clear");
+                    cout << "Mouvement invalide ! Veuillez recommencer." << endl;
+                }
+            }
+            else{
+                system("clear");
+                cout << "Vous essayez de déplacer le pion de votre adversaire !" << endl;
+            }
         }
     }
 
