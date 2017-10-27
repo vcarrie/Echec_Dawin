@@ -19,7 +19,6 @@ Echiquier::Echiquier()
     for (int i = 0 ; i < 64 ; i++)
     {
         m_cases[ i ] = NULL;
-        //m_cases[ i ] = 0; //equivalent
     }
 }
 

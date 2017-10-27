@@ -12,20 +12,20 @@ Tour::mouvementValide(Echiquier &e, int x, int y)
     int direction = 0;
 
     if((x < 1) || (y < 1) || (x > 8) || (y > 8)){ return false; } //hors limite
-    if(((m_x == x)&&(y == m_y))){ return false; }//same place
-    if(((m_x != x)&&(y != m_y))){ return false; }//move is not straight
+    if(((m_x == x)&&(y == m_y))){ return false; }//même position ?
+    if(((m_x != x)&&(y != m_y))){ return false; }//déplacement hors de l'échiquier ?
 
     if(e.getPiece(x, y) != NULL){
         if(e.getPiece(x, y)->get_white() == m_white){ return false; }
-    }//Same color on target
+    }//On regarde si la pièce est de la même couleur que la couleur de la pièce déplacée
 
     //path is blocked or not?
-    if((x==m_x)&&(y>m_y)){ direction = 0;}//down
-    if((x==m_x)&&(y<m_y)){ direction = 1;}//up
-    if((x>m_x)&&(y==m_y)){ direction = 2;} //right
-    if((x<m_x)&&(y==m_y)){ direction = 3;}//left
+    if((x==m_x)&&(y>m_y)){ direction = 0;}//bas
+    if((x==m_x)&&(y<m_y)){ direction = 1;}//haut
+    if((x>m_x)&&(y==m_y)){ direction = 2;}//gauche
+    if((x<m_x)&&(y==m_y)){ direction = 3;}//droite
 
-    switch (direction) {
+    switch (direction) { //en fonction de la direction on regarde si il n'y a aucune case sur le chemin
     case 0:
         for ( int i = m_y+1; i < y; i++ ) {
             if(e.getPiece(x, i)!=NULL){ return false; }

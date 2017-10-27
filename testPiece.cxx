@@ -29,14 +29,14 @@ int main( int argc, char** argv )
 
     Echiquier e;
 
-    bool piecesOK;
+    bool piecesOK; //Initialisation du jeu
     piecesOK = jn.placerPieces(e);
     assert(piecesOK);
     piecesOK = jb.placerPieces(e);
     assert(piecesOK);
 
     int x_before, y_before, x_after, y_after;
-    bool joueur = true; //White player = true, Black player = false
+    bool joueur = true; //Joueur blanc = true, Joueur noir = false
     bool endGame = false;
     string joueurString;
 
@@ -96,10 +96,10 @@ int main( int argc, char** argv )
             cout << "Il n'y a pas de pièce ici !";
         }
         else {
-            if(e.getPiece(x_before, y_before)->get_white() == joueur){
-                if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){
+            if(e.getPiece(x_before, y_before)->get_white() == joueur){ //Si la pièce est de la meme couleur que le joueur
+                if(e.deplacer(e.getPiece(x_before, y_before), x_after, y_after)){ //On déplace la pièce tout en regardant si le mouvement est valide
                     system("clear");
-                    joueur = !joueur;
+                    joueur = !joueur; //on change de joueur
                 }
                 else {
                     system("clear");

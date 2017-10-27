@@ -9,44 +9,30 @@ Cavalier::mouvementValide(Echiquier &ech, int x, int y)
     y -=1;
     int indiceDemande = x + y * 8;
 
-    Cavalier::calcul_move_possible(m_x-1, m_y-1);
+    Cavalier::calcul_move_possible(m_x-1, m_y-1); //On calcule les cases visables
     bool is_in_tab = false;
     bool is_not_empty = (ech.getPiece(x+1, y+1)!= NULL);
     bool move_is_okay = true;
 
     for ( int i = 0; i < 8; i++ ) {
-        if(liste_move[i]==indiceDemande){ is_in_tab = true; }
-         cout << liste_move[i] << endl;
+        if(liste_move[i]==indiceDemande){ is_in_tab = true; } //On vérifie si la valeur est présente dans le tableau de déplacement
     }
 
-    if( is_not_empty){ if(ech.getPiece(x+1, y+1)->get_white() == m_white){ move_is_okay=false; } }
+    if( is_not_empty){ if(ech.getPiece(x+1, y+1)->get_white() == m_white){ move_is_okay=false; } } //Si la case n'est pas vide et que la pièce soit de la même couleur
 
-    Piece *p = ech.getPiece(x, y);
-    if (p)
-    {
-        cout << p->type() << endl;
-        cout << x << endl;
-        cout << y << endl;
-    }
-    cout << is_not_empty << endl;
-cout << is_in_tab << endl;
-cout << move_is_okay << endl;
-
-
-  cout << "mouvementValide de Cavalier" << endl;
-  return (is_in_tab && move_is_okay);
+    return (is_in_tab && move_is_okay);
 }
 
 char
 Cavalier::type()
 {
-  return m_white ? 'C' : 'c';
+    return m_white ? 'C' : 'c';
 }
 
 int*
 Cavalier::get_move_possible()
 {
-  return liste_move;
+    return liste_move;
 }
 
 void
